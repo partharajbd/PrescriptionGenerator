@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/component :: header"></div>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="mt-4 mb-3">List of prescription</h4>
+
+            <div class="border p-2 mb-2">
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-2">
+                            Date from <input type="date" name="from" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            Date to
+                            <input type="date" name="to" class="form-control">
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-primary mt-4">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <a th:href="@{/prescription/create}" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i>
+                Create prescription
+            </a>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Patient Name</th>
+                    <th>Prescription Date</th>
+                    <th>Next Visit Date</th>
+                    <th><i class="fa fa-cog"></i></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prescription: ${prescriptions}">
+                    <td th:text="${prescription.getId()}"></td>
+                    <td th:text="${prescription.getPatientName() + ' ( ' + prescription.getAge() + ' )'}"></td>
+                    <td th:text="${#dates.format(prescription.getPrescriptionDate(), 'dd MMM, yyyy')}"></td>
+                    <td th:text="${#dates.format(prescription.getNextVisitDate(), 'dd MMM, yyyy')}"></td>
+                    <td>
+                        <a th:href="@{'/prescription/'+${prescription.getId()}+''}" class="btn" title="View details">
+                            <i class="fa fa-eye text-primary"></i>
+                        </a>
+                        <a th:href="@{'/prescription/'+${prescription.getId()}+'/edit'}" class="btn" title="Edit">
+                            <i class="fa fa-edit text-warning"></i>
+                        </a>
+                        <button class="btn btnDelete" title="Delete">
+                            <i class="fa fa-trash text-danger"></i>
+                        </button>
+                        <form th:action="@{'/prescription/'+${prescription.getId()}}" th:method="delete"></form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="fragments/component :: footer"></div>
+</html>

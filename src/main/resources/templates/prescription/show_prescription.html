@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/component :: header"></div>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="mt-4 mb-3">Prescription Details</h4>
+
+            <a th:href="@{/}" class="btn btn-primary btn-sm">
+                <i class="fa fa-chevron-left"></i>
+                Back to list
+            </a>
+
+            <div class="border p-4">
+                <table class="table">
+                    <tr>
+                        <td>ID</td>
+                        <td th:text="${prescription.getId()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td th:text="${#dates.format(prescription.getPrescriptionDate(), 'dd MMM, yyyy')}"></td>
+                    </tr>
+                    <tr>
+                        <td>Name of patient</td>
+                        <td th:text="${prescription.getPatientName()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Age</td>
+                        <td th:text="${prescription.getAge()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td th:text="${prescription.getGender()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Diagnosis</td>
+                        <td th:text="${prescription.getDiagnosis()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Medicines</td>
+                        <td th:text="${prescription.getMedicines()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Next visit date</td>
+                        <td th:text="${#dates.format(prescription.getNextVisitDate(), 'dd MMM, yyyy')}"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="fragments/component :: footer"></div>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/component :: header"></div>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="mt-4 mb-3">Create new prescription</h4>
+
+            <a th:href="@{/}" class="btn btn-primary btn-sm">
+                <i class="fa fa-chevron-left"></i>
+                Back to list
+            </a>
+
+            <div class="border p-4">
+                <form th:action="@{/prescription}" method="post" th:object="${prescriptionRequest}">
+                    <div class="row">
+                        <div class="offset-md-4 col-md-4">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" class="form-control" th:field="*{prescriptionDate}">
+                                <span th:if="${#fields.hasErrors('prescriptionDate')}" th:errors="*{prescriptionDate}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Name of patient</label>
+                                <input type="text" class="form-control" th:field="*{patientName}">
+                                <span th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" class="form-control" th:field="*{age}">
+                                <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select class="form-control" th:field="*{gender}">
+                                    <option value=""></option>
+                                    <option value="Male">Male</option>
+                                    <option value="Male">Female</option>
+                                </select>
+                                <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Diagnosis</label>
+                                <textarea class="form-control" th:field="*{diagnosis}"></textarea>
+                                <span th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Medicines</label>
+                                <textarea class="form-control" th:field="*{medicines}"></textarea>
+                                <span th:if="${#fields.hasErrors('medicines')}" th:errors="*{medicines}"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Next visit date</label>
+                                <input type="date" class="form-control" th:field="*{nextVisitDate}">
+                                <span th:if="${#fields.hasErrors('nextVisitDate')}" th:errors="*{nextVisitDate}"></span>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary mt-3">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="fragments/component :: footer"></div>
+</html>
