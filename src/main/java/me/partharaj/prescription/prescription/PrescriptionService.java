@@ -58,4 +58,8 @@ public class PrescriptionService {
     public List<Map<Date, Long>> getDateWisePrescriptionCount() {
         return prescriptionRepository.getDateWisePrescriptionCount();
     }
+
+    public List<Prescription> getAll() {
+        return prescriptionRepository.findAll();
+    }
 }
