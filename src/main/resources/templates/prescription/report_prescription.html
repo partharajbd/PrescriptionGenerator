@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/component :: header"></div>
+<body>
+<div class="container">
+    <div th:replace="fragments/component :: nav"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row mt-3 mb-3">
+                <div class="col-md-6">
+                    <h4>Report</h4>
+                </div>
+                <div class="col-md-6">
+                    <a th:href="@{/}" class="btn btn-primary btn-sm float-end">
+                        <i class="fa fa-chevron-left"></i>
+                        Back to list
+                    </a>
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Number of prescriptions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cnt, i : ${counts}">
+                    <td th:text="${i.count}"></td>
+                    <td th:text="${#dates.format(cnt.get('date'), 'dd MMM, yyyy')}"></td>
+                    <td>
+                        <a th:href="@{/(from=${#dates.format(cnt.get('date'), 'yyyy-MM-dd')}, to=${#dates.format(cnt.get('date'), 'yyyy-MM-dd')})}"
+                           th:text="${cnt.get('countOf')}"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="fragments/component :: footer"></div>
+</html>

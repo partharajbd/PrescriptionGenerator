@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -52,5 +53,9 @@ public class PrescriptionService {
                 prescriptionRequest.getMedicines(),
                 prescriptionRequest.getNextVisitDate()
         ));
+    }
+
+    public List<Map<Date, Long>> getDateWisePrescriptionCount() {
+        return prescriptionRepository.getDateWisePrescriptionCount();
     }
 }

@@ -8,10 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @AllArgsConstructor
@@ -106,5 +103,12 @@ public class PrescriptionController {
     public String prescriptionCreateForm(@PathVariable("id") Long prescriptionId){
         prescriptionService.deletePrescription(prescriptionId);
         return "redirect:/";
+    }
+
+    @GetMapping("/prescription/report")
+    public String report(Model model){
+        List<Map<Date, Long>> counts = prescriptionService.getDateWisePrescriptionCount();
+        model.addAttribute("counts", counts);
+        return "prescription/report_prescription";
     }
 }
