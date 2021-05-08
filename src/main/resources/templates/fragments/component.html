@@ -13,6 +13,19 @@
     <title>Prescription</title>
 </head>
 
+<div th:fragment="nav" class="row mt-3 mb-3">
+    <div class="col-md-12">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand">Prescription Generator</a>
+                <div class="d-flex">
+                    <a th:href="@{/auth/logout}">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
 <footer th:fragment="footer">
     <div class="footer text-center mt-3">
         &copy; <a href="http://partharaj.me" target="_blank">Partharaj Deb</a>

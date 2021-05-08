@@ -26,7 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/registration/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/auth/login").permitAll();
+                .formLogin().loginPage("/auth/login").permitAll()
+                .and().logout().logoutUrl("/auth/logout").logoutSuccessUrl("/logoutSucceed");
     }
 
     @Override
