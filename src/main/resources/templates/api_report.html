@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="fragments/component :: header"></div>
+<style>
+    th{
+        vertical-align: middle !important;
+        text-align: center !important;
+    }
+</style>
 <body>
 <div class="container">
     <div th:replace="fragments/component :: nav"></div>
@@ -12,9 +18,46 @@
                 </div>
             </div>
 
-            <table class="table">
-                <!--      Show Nlm data as table!!!        -->
-            </table>
+            <div class="card">
+                <div class="card-body">
+                    <h6>NLM Disclaimer</h6>
+                    <p th:text="${nlm.nlmDisclaimer}">nlm Disclaimer</p>
+                    <h6>Result for user input</h6>
+                    <p th:text="${nlm.userInput.rxcui}"></p>
+                    <h6>Source Name:</h6>
+                    <p th:text="${nlm.getInteractionTypeGroup().get(0).getSourceName()}"></p>
+                    <h6>Source Disclaimer:</h6>
+                    <p th:text="${nlm.getInteractionTypeGroup().get(0).getSourceDisclaimer()}"></p>
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th colspan="2">Interaction Concept</th>
+                            <th rowspan="2">Severity</th>
+                            <th rowspan="2">Description</th>
+                        </tr>
+                        <tr>
+                            <th>Min Concept Item</th>
+                            <th>Source Contept Item</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="pair : ${nlm.getInteractionTypeGroup().get(0).getInteractionType().get(0).getInteractionPair()}">
+                            <tr th:each="concept, i: ${pair.getInteractionConcept()}">
+                                <td th:text="${concept.getMinConceptItem().rxcui + ' - ' + concept.getMinConceptItem().name + ' ('+ concept.getMinConceptItem().tty + ')'}"></td>
+                                <td>
+                                    <a th:href="${concept.getSourceConceptItem().url}" th:text="${concept.getSourceConceptItem().id + ' - ' + concept.getSourceConceptItem().name}"></a>
+                                </td>
+                                <td th:if="${i.index == 0}" th:rowspan="${pair.getInteractionConcept().size()}" th:text="${pair.severity}"></td>
+                                <td th:if="${i.index == 0}" th:rowspan="${pair.getInteractionConcept().size()}" th:text="${pair.description}"></td>
+                            </tr>
+
+                        </th:block>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
